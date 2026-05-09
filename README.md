@@ -22,6 +22,8 @@ cd ~/GitHub/wayland-whisper-dictation
 The installer:
 
 - Installs Debian packages with `apt-get`
+- Installs `whisper.cpp` from Debian when available
+- Falls back to building `whisper.cpp` from source under `~/.local/opt/whisper.cpp`
 - Downloads `ggml-base.en.bin`
 - Installs `dictate-toggle` to `~/.local/bin`
 - Registers the GNOME shortcut `Super+Shift+D`
@@ -89,3 +91,5 @@ The uninstaller removes the shortcut and `~/.local/bin/dictate-toggle`. It leave
 This is intentionally simple: no daemon, no tray icon, no cloud service, and no automatic paste. It records locally, transcribes locally, and copies locally.
 
 The script filters common Whisper silence hallucinations like `(music)` so quiet clips do not overwrite the clipboard with noise.
+
+If Debian does not package `whisper.cpp` for your release, `install.sh` builds it from source. That fallback needs `git`, `cmake`, and `build-essential`, which the installer includes in its base package set.
